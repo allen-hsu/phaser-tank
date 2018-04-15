@@ -1,0 +1,22 @@
+{
+  "parser": "babel-eslint",
+  "extends": "eslint:recommended",
+  "parserOptions": {
+    "ecmaVersion": 6,
+    "sourceType": "module"
+  },
+  "env": {
+    "browser": true
+  },
+  "globals": {
+    "Phaser": true
+  },
+  "settings": {
+    "import/core-modules": [ "phaser" ],
+    "import/parser": "webpack",
+    "import/resolver": { "webpack": {} }
+  },
+  "rules": {
+    "no-console": 0
+  }
+}
