@@ -1,13 +1,12 @@
-import BaseComponent from '../base/BaseComponent';
+import BaseNode from '../base/BaseNode';
 import BaseButton from '../base/BaseButton';
-export default class Controllerable extends BaseComponent {
-    constructor(scene, name) {
-        super(scene, name);
+export default class TankInput extends BaseNode {
+    constructor(scene, x, y) {
+        super(scene, x, y, 'tankinput');
     }
 
     preload() {
         this.scene.load.spritesheet('buttonvertical', 'assets/buttons/buttons-big/button-vertical.png', { frameWidth: 64, frameHeight: 64 });
-        //this.scene.load.spritesheet('buttonhorizontal', 'assets/buttons/buttons-big/button-horizontal.png',{ frameWidth: 64, frameHeight: 64 });
         this.scene.load.spritesheet('buttondiagonal', 'assets/buttons/buttons-big/button-diagonal.png',{ frameWidth: 64, frameHeight: 64 });
         this.scene.load.spritesheet('buttonfire', 'assets/buttons/buttons-big/button-round-a.png',{ frameWidth: 96, frameHeight: 96 });
     }
@@ -27,10 +26,6 @@ export default class Controllerable extends BaseComponent {
         this.bottomleft = new BaseButton(this.scene, 80, 540, 'buttondiagonal', 6, this.onTurnLeft);
         // buttonbottomright 
         this.bottomright = new BaseButton(this.scene, 240, 540, 'buttondiagonal', 7, this.onTurnRight);
-    }
-
-    update() {
-    
     }
 
     onFire(pointer) {

@@ -1,8 +1,9 @@
 export default class BaseNode {
-    constructor(scene, x, y) {
+    constructor(scene, x, y, name) {
         this._scene = scene;
         this._x = x;
         this._y = y;
+        this._name = name;
         this._components = {};
     }
 
@@ -37,5 +38,9 @@ export default class BaseNode {
 
     get scene() {
         return this._scene;
+    }
+    
+    get name() {
+        return this._name;
     }
 }

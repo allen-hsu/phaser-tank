@@ -1,10 +1,7 @@
-import Phaser from 'phaser'
-
-export default class BootScene extends Phaser.Scene {
+import BaseScene from '../base/BaseScene'
+export default class BootScene extends BaseScene {
     constructor () {
-        super({
-            key:'BootScene'
-        })
+        super('BootScene');
     }
 
     preload() {

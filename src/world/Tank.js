@@ -1,24 +1,25 @@
 import BaseNode from '../base/BaseNode';
-import Controllerable from '../components/Controllerable';
+import Transferable from '../components/Transferable';
 import BlueAttackable from '../components/BlueAttackable';
 import RedAttackable from '../components/RedAttackable';
 import GreenAttackable from '../components/GreenAttackable';
 import Bullet from './Bullet';
 export const TankType = {
-    RED: 'RED',
-    GREEN: 'GREEN',
-    BLUE: 'BLUE',
+    RED: 0,
+    GREEN: 1,
+    BLUE: 2,
+    LENGTH : 3,
 };
 
 export default class Tank extends BaseNode {
     
-    constructor(scene, x, y, type) {
-        super(scene, x, y);
+    constructor(scene, x, y, type, name) {
+        super(scene, x, y, name);
         this._type = type;
     }
 
     initComponent() {
-        this._controller = this.addComponent(new Controllerable(this.scene, 'controller'), this);
+        this._transfer = this.addComponent(new Transferable(this.scene, 'controller'), this);
         this.setWeapon();
         console.log('initComponent');
     }
@@ -32,7 +33,7 @@ export default class Tank extends BaseNode {
     create() {
         super.create();
         this.tank = this.scene.add.image(400, 150, 'tank');
-        this._controller.setTarget(this.tank);
+        this._transfer.setTarget(this.tank);
         this.setTank();
         this._weapon.attack();
 
@@ -46,13 +47,16 @@ export default class Tank extends BaseNode {
     }
 
     update() {
-        if (Phaser.Input.Keyboard.JustDown(this.spacebar))
-        {
-            var bullet = this.bullets.get();
-
-            if (bullet) {
-                bullet.fire(this.tank.x, this.tank.y);
+        if (Phaser.Input.Keyboard.JustDown(this.spacebar)) {
+            this._type += 1;
+            if(this._type >= TankType.LENGTH) {
+                this._type = 0;
             }
+            this.changeTank(this._type);
+            // var bullet = this.bullets.get();
+            // if (bullet) {
+            //     bullet.fire(this.tank.x, this.tank.y);
+            // }
         }
     }
 
