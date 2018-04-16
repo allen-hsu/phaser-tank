@@ -5,10 +5,6 @@ export default class BaseComponent {
         this._scene = scene;
     }
 
-    setTarget(target) {
-        this._target = target;
-    }
-
     preload() {
 
     }

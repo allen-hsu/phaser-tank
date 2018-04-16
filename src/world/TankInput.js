@@ -12,8 +12,8 @@ export default class TankInput extends BaseNode {
     }
 
     create() {
-        //fire
-        this.fire = new BaseButton(this.scene, 600, 500, 'buttonfire', 0, this.onFire);
+        //action
+        this.action = new BaseButton(this.scene, 600, 500, 'buttonfire', 0, this.onAction);
         //left
         this.left = new BaseButton(this.scene, 80, 472, 'buttonvertical', 1, this.onLeft);
         //right
@@ -32,36 +32,36 @@ export default class TankInput extends BaseNode {
 
     update() {
         if (Phaser.Input.Keyboard.JustDown(this.spacebar)) {
-            this.scene.emmiter.emit('spacedown');
+            this.scene.emmiter.emit('input_spacedown');
         }
     }
 
-    onFire(pointer) { // eslint-disable-line no-unused-vars
-        this.scene.emmiter.emit('fire');
+    onAction(pointer) { // eslint-disable-line no-unused-vars
+        this.scene.emmiter.emit('input_action');
     }
 
     onLeft(pointer) { // eslint-disable-line no-unused-vars
-
+        this.scene.emmiter.emit('input_left');
     }
 
     
     onRight(pointer) { // eslint-disable-line no-unused-vars
-        
+        this.scene.emmiter.emit('input_right');
     }
 
     onDown(pointer) { // eslint-disable-line no-unused-vars
-        
+        this.scene.emmiter.emit('input_down');
     }
 
     onUp(pointer) { // eslint-disable-line no-unused-vars
-        
+        this.scene.emmiter.emit('input_up');
     }
 
     onTurnLeft(pointer) { // eslint-disable-line no-unused-vars
-        
+        this.scene.emmiter.emit('input_turnleft');
     }
 
     onTurnRight(pointer) { // eslint-disable-line no-unused-vars
-        
+        this.scene.emmiter.emit('input_turnright');
     }
 }

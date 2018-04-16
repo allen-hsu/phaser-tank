@@ -31,9 +31,8 @@ export default class BaseNode {
         }
     }
 
-    addComponent(component, target) {
+    addComponent(component) {
         this._components[component.name] = component;
-        this._components[component.name].setTarget(target);
         return component;
     }
 

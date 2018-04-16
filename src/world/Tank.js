@@ -21,7 +21,6 @@ export default class Tank extends BaseNode {
     initComponent() {
         this._transfer = this.addComponent(new Transferable(this.scene, 'controller'), this);
         this.setWeapon();
-        console.log('initComponent');
     }
 
     preload() {
@@ -33,7 +32,6 @@ export default class Tank extends BaseNode {
     create() {
         super.create();
         this.tank = this.scene.add.image(400, 150, 'tank');
-        this._transfer.setTarget(this.tank);
         this.setTank();
         this._weapon.attack();
 
@@ -44,7 +42,8 @@ export default class Tank extends BaseNode {
         });
 
         this.scene.emmiter.on('spacedown', this.onChangeTank, this);
-        this.scene.emmiter.on('fire', this.onFire, this);
+        this.scene.emmiter.on('attack', this.onFire, this);
+        this.scene.emmiter.on('rotate', this.onRotate, this);
     }
 
     update() {
@@ -68,13 +67,13 @@ export default class Tank extends BaseNode {
     setWeapon() {
         switch (this._type) {
             case TankType.RED :
-                this._weapon = this.addComponent(new RedAttackable(this, 'weapon'), this);
+                this._weapon = this.addComponent(new RedAttackable(this.scene, 'weapon'), this);
             break;
             case TankType.GREEN :
-                this._weapon = this.addComponent(new GreenAttackable(this, 'weapon'), this);
+                this._weapon = this.addComponent(new GreenAttackable(this.scene, 'weapon'), this);
             break;
             case TankType.BLUE :
-                this._weapon = this.addComponent(new BlueAttackable(this, 'weapon'), this);
+                this._weapon = this.addComponent(new BlueAttackable(this.scene, 'weapon'), this);
             break;
         }
     }
@@ -99,4 +98,8 @@ export default class Tank extends BaseNode {
             bullet.fire(this.tank.x, this.tank.y);
         }
     }
+
+    onRotate(angle) {
+        this.tank.rotation += angle;
+    } 
 }

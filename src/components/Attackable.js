@@ -7,4 +7,13 @@ export default class Attackable extends BaseComponent {
     attack() {
 
     }
+
+    create() {
+        console.log(this.scene.emmiter);
+        this.scene.emmiter.on('input_action', this.onAttack, this);
+    }
+
+    onAttack() {
+        this.scene.emmiter.emit('attack');
+    }
 }
