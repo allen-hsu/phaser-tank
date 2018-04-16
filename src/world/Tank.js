@@ -95,7 +95,13 @@ export default class Tank extends BaseNode {
     onFire() {
         var bullet = this.bullets.get();
         if (bullet) {
-            bullet.fire(this.tank.x, this.tank.y);
+            
+            //bullet.fire(this.tank);
+            // Phaser.Math.Rotate(offset, this.tank.rotation);
+            // bullet.fire(this.tank.x + offset.x, this.tank.y + offset.y);
+            let offset = new Phaser.Geom.Point(0, 0);
+            Phaser.Math.Rotate(offset, this.tank.rotation);
+            bullet.fire(this.tank.x + offset.x, this.tank.y + offset.y, this.tank.rotation);
         }
     }
 

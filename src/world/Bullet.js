@@ -5,22 +5,31 @@ export default class Bullet extends Phaser.GameObjects.Image {
     constructor(scene) {
         super(scene, 0, 0, 'bullet');
         this.speed = Phaser.Math.GetSpeed(600, 1);
+        this.lifespan = 3000;
+        this.velocity = new Phaser.Geom.Point(0, 0);
     }
 
-    fire(x, y) {
-        this.setPosition(x, y);
-
-        this.setActive(true);
-        this.setVisible(true);
+    fire(x, y, direction) {
+        this.lifespan = 3000;
+        this.setPosition(x, y)
+          .setActive(true)
+          .setVisible(true)
+          
+        this.velocity.setTo(this.speed, 0);
+        Phaser.Math.Rotate(this.velocity, direction);
+        this.rotation = direction;
     }
 
     update(time, delta) {
-        this.x += this.speed * delta;
+        // Update position based on velocity
+        this.x += this.velocity.x * delta;
+        this.y += this.velocity.y * delta;
+        
+        this.lifespan -= delta;
 
-        if (this.x > 820)
-        {
-            this.setActive(false);
-            this.setVisible(false);
+        if (this.lifespan <= 0) {
+          this.setActive(false);
+          this.setVisible(false);
         }
     }
 }
