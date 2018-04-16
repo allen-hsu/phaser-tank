@@ -1,5 +1,5 @@
-import BaseComponent from './BaseComponent';
-import BaseButton from './BaseButton';
+import BaseComponent from '../base/BaseComponent';
+import BaseButton from '../base/BaseButton';
 export default class Controllerable extends BaseComponent {
     constructor(scene, name) {
         super(scene, name);

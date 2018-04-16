@@ -6,7 +6,12 @@ export default class BaseNode {
         this._components = {};
     }
 
+    initComponent() {
+
+    }
+
     preload() {
+        this.initComponent();
         for (var key in this._components) {
             this._components[key].preload();
         }
