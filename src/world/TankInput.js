@@ -26,10 +26,18 @@ export default class TankInput extends BaseNode {
         this.bottomleft = new BaseButton(this.scene, 80, 540, 'buttondiagonal', 6, this.onTurnLeft);
         // buttonbottomright 
         this.bottomright = new BaseButton(this.scene, 240, 540, 'buttondiagonal', 7, this.onTurnRight);
+
+        this.spacebar = this.scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
     }
 
-    onFire(pointer) {
-        console.log(pointer);
+    update() {
+        if (Phaser.Input.Keyboard.JustDown(this.spacebar)) {
+            this.scene.emmiter.emit('spacedown');
+        }
+    }
+
+    onFire(pointer) { // eslint-disable-line no-unused-vars
+        this.scene.emmiter.emit('fire');
     }
 
     onLeft(pointer) { // eslint-disable-line no-unused-vars

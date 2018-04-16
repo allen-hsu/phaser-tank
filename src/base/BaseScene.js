@@ -6,6 +6,7 @@ export default class BaseScene extends Phaser.Scene {
             key: key
         })
         this._nodes = {};
+        this._emmiter = new Phaser.EventEmitter();
     }
 
     preload() {
@@ -29,6 +30,10 @@ export default class BaseScene extends Phaser.Scene {
     addNode(node) {
         this._nodes[node.name] = node;
         return node;
+    }
+
+    get emmiter() {
+        return this._emmiter;
     }
 
 }

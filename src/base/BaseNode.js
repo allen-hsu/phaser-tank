@@ -22,6 +22,7 @@ export default class BaseNode {
         for (var key in this._components) {
             this._components[key].create();
         }
+
     }
 
     update() {

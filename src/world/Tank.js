@@ -43,21 +43,12 @@ export default class Tank extends BaseNode {
             runChildUpdate: true
         });
 
-        this.spacebar = this.scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
+        this.scene.emmiter.on('spacedown', this.onChangeTank, this);
+        this.scene.emmiter.on('fire', this.onFire, this);
     }
 
     update() {
-        if (Phaser.Input.Keyboard.JustDown(this.spacebar)) {
-            this._type += 1;
-            if(this._type >= TankType.LENGTH) {
-                this._type = 0;
-            }
-            this.changeTank(this._type);
-            // var bullet = this.bullets.get();
-            // if (bullet) {
-            //     bullet.fire(this.tank.x, this.tank.y);
-            // }
-        }
+
     }
 
     setTank() {
@@ -92,5 +83,20 @@ export default class Tank extends BaseNode {
         this._type = type;
         this.setTank();
         this.setWeapon();
+    }
+
+    onChangeTank() {
+        this._type += 1;
+        if(this._type >= TankType.LENGTH) {
+            this._type = 0;
+        }
+        this.changeTank(this._type);
+    }
+
+    onFire() {
+        var bullet = this.bullets.get();
+        if (bullet) {
+            bullet.fire(this.tank.x, this.tank.y);
+        }
     }
 }
