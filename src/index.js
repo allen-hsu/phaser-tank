@@ -4,6 +4,7 @@ import MainScene from 'scene/MainScene'
 const config = {
   type: Phaser.AUTO,
   parent: 'phaser-example',
+  backgroundColor: '#f3cca3',
   width: 800,
   height: 600,
   scene: [
