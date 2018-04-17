@@ -5,11 +5,9 @@ export default class BootScene extends BaseScene {
     }
 
     preload() {
-        console.log('preload');
     }
 
     create() {
-        console.log('create');
         this.scene.start('MainScene');
     }
 }

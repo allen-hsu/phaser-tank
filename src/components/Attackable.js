@@ -6,13 +6,10 @@ export default class Attackable extends BaseComponent {
     }
 
     create() {
-        console.log(this.scene.emmiter);
         this.scene.emmiter.on('input_action', this.onAttack, this);
     }
 
     onAttack() {
-        //this.scene.emmiter.emit('attack');
-        console.log(this._bullet);
         var bullet = this._bullet.get();
         if (bullet) {
             let offset = new Phaser.Geom.Point(0, 0);

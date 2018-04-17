@@ -15,17 +15,17 @@ export default class TankInput extends BaseNode {
         //action
         this.action = new BaseButton(this.scene, 600, 500, 'buttonfire', 0, this.onAction);
         //left
-        this.left = new BaseButton(this.scene, 80, 472, 'buttonvertical', 1, this.onLeft);
+        this.left = new BaseButton(this.scene, 80, 472, 'buttonvertical', 1, this.onTurnLeft);
         //right
-        this.right = new BaseButton(this.scene, 240, 472, 'buttonvertical', 1, this.onRight);
+        this.right = new BaseButton(this.scene, 240, 472, 'buttonvertical', 1, this.onTurnRight);
         //up
         this.up = new BaseButton(this.scene, 160, 416, 'buttonvertical', 1, this.onUp);
         //down
         this.down = new BaseButton(this.scene, 160, 536, 'buttonvertical', 1, this.onDown);
-        // buttonbottomleft 
-        this.bottomleft = new BaseButton(this.scene, 80, 540, 'buttondiagonal', 6, this.onTurnLeft);
-        // buttonbottomright 
-        this.bottomright = new BaseButton(this.scene, 240, 540, 'buttondiagonal', 7, this.onTurnRight);
+        // // buttonbottomleft 
+        // this.bottomleft = new BaseButton(this.scene, 80, 540, 'buttondiagonal', 6, this.onTurnLeft);
+        // // buttonbottomright 
+        // this.bottomright = new BaseButton(this.scene, 240, 540, 'buttondiagonal', 7, this.onTurnRight);
 
         this.spacebar = this.scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
     }
@@ -40,28 +40,28 @@ export default class TankInput extends BaseNode {
         this.scene.emmiter.emit('input_action');
     }
 
-    onLeft(pointer) { // eslint-disable-line no-unused-vars
-        this.scene.emmiter.emit('input_left');
-    }
+    // onLeft(pointer) { // eslint-disable-line no-unused-vars
+    //     this.scene.emmiter.emit('input_left', -5, 0);
+    // }
 
     
-    onRight(pointer) { // eslint-disable-line no-unused-vars
-        this.scene.emmiter.emit('input_right');
-    }
+    // onRight(pointer) { // eslint-disable-line no-unused-vars
+    //     this.scene.emmiter.emit('input_right', 5, 0);
+    // }
 
     onDown(pointer) { // eslint-disable-line no-unused-vars
-        this.scene.emmiter.emit('input_down');
+        this.scene.emmiter.emit('input_down', 0, 5);
     }
 
     onUp(pointer) { // eslint-disable-line no-unused-vars
-        this.scene.emmiter.emit('input_up');
+        this.scene.emmiter.emit('input_up', 0, -5);
     }
 
     onTurnLeft(pointer) { // eslint-disable-line no-unused-vars
-        this.scene.emmiter.emit('input_turnleft', -0.5);
+        this.scene.emmiter.emit('input_turnleft', -5);
     }
 
     onTurnRight(pointer) { // eslint-disable-line no-unused-vars
-        this.scene.emmiter.emit('input_turnright', 0.5);
+        this.scene.emmiter.emit('input_turnright', 5);
     }
 }

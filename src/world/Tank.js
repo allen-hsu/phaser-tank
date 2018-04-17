@@ -26,12 +26,21 @@ export default class Tank extends BaseNode {
     preload() {
         super.preload();
         this.scene.load.image('tank', 'assets/images/tank.png');
+        this.scene.load.image('logo', 'assets/images/logo.png');
         this.scene.load.image('bullet', 'assets/bullets/bullet.png');
     }
 
     create() {
         super.create();
         this._tank = this.scene.add.image(400, 150, 'tank');
+        // this._test = this.matter.add.image(0, 150, 'logo');
+        // this._test.setVelocityX(10);
+
+        // this.matter.world.on('collisionstart', function (event, bodyA, bodyB) {
+        //     bodyA.gameObject.setTint(0xff0000);
+        //     bodyB.gameObject.setTint(0x00ff00);
+        // });
+
         this._bullets = this.scene.add.group({
             classType: Bullet,
             maxSize: 30,
