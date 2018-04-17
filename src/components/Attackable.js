@@ -1,11 +1,8 @@
 import BaseComponent from '../base/BaseComponent';
 export default class Attackable extends BaseComponent {
-    constructor(scene, name) {
-        super(scene, name);
-    }
-
-    attack() {
-
+    constructor(scene, name, target, bullet) {
+        super(scene, name, target);
+        this.setBullet(bullet);
     }
 
     create() {
@@ -14,6 +11,17 @@ export default class Attackable extends BaseComponent {
     }
 
     onAttack() {
-        this.scene.emmiter.emit('attack');
+        //this.scene.emmiter.emit('attack');
+        console.log(this._bullet);
+        var bullet = this._bullet.get();
+        if (bullet) {
+            let offset = new Phaser.Geom.Point(0, 0);
+            Phaser.Math.Rotate(offset, this._target.rotation);
+            bullet.fire(this._target.x + offset.x, this._target.y + offset.y, this._target.rotation);
+        }
+    }
+
+    setBullet(bullet) {
+        this._bullet = bullet;
     }
 }

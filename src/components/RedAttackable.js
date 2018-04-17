@@ -1,10 +1,11 @@
 import Attackable from './Attackable';
 export default class RedAttackable extends Attackable {
-    constructor(scene, name) {
-        super(scene, name);
+    constructor(scene, name, target) {
+        super(scene, name, target);
     }
 
-    attack() {
+    onAttack() {
+        super.onAttack();
         console.log('red fire');
     }
 }

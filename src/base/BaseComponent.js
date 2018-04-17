@@ -1,8 +1,9 @@
 
 export default class BaseComponent {
-    constructor(scene, name) {
+    constructor(scene, name, target) {
         this._name = name;
         this._scene = scene;
+        this._target = target;
     }
 
     preload() {
@@ -23,5 +24,13 @@ export default class BaseComponent {
 
     get scene() {
         return this._scene;
+    }
+
+    setTarget(target) {
+        this._target = target;
+    }
+
+    get target() {
+        return this._target;
     }
 }

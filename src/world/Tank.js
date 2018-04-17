@@ -19,7 +19,7 @@ export default class Tank extends BaseNode {
     }
 
     initComponent() {
-        this._transfer = this.addComponent(new Transferable(this.scene, 'controller'), this);
+        this._transfer = this.addComponent(new Transferable(this.scene, 'tansfer', this), this);
         this.setWeapon();
     }
 
@@ -31,19 +31,20 @@ export default class Tank extends BaseNode {
 
     create() {
         super.create();
-        this.tank = this.scene.add.image(400, 150, 'tank');
-        this.setTank();
-        this._weapon.attack();
-
-        this.bullets = this.scene.add.group({
+        this._tank = this.scene.add.image(400, 150, 'tank');
+        this._bullets = this.scene.add.group({
             classType: Bullet,
             maxSize: 30,
             runChildUpdate: true
         });
 
-        this.scene.emmiter.on('spacedown', this.onChangeTank, this);
-        this.scene.emmiter.on('attack', this.onFire, this);
-        this.scene.emmiter.on('rotate', this.onRotate, this);
+        this.setTank();
+        this._transfer.setTarget(this._tank);
+
+        this._weapon.setTarget(this._tank);
+        this._weapon.setBullet(this._bullets);
+        // 
+        this.scene.emmiter.on('input_spacedown', this.onChangeTank, this);
     }
 
     update() {
@@ -53,13 +54,13 @@ export default class Tank extends BaseNode {
     setTank() {
         switch (this._type) {
             case TankType.RED :
-                this.tank.setTint(0xff0000);
+                this._tank.setTint(0xff0000);
             break;
             case TankType.GREEN :
-                this.tank.setTint(0x00ff00);
+                this._tank.setTint(0x00ff00);
             break;
             case TankType.BLUE :
-                this.tank.setTint(0x0000ff);
+                this._tank.setTint(0x0000ff);
             break;
         }
     }
@@ -92,20 +93,7 @@ export default class Tank extends BaseNode {
         this.changeTank(this._type);
     }
 
-    onFire() {
-        var bullet = this.bullets.get();
-        if (bullet) {
-            
-            //bullet.fire(this.tank);
-            // Phaser.Math.Rotate(offset, this.tank.rotation);
-            // bullet.fire(this.tank.x + offset.x, this.tank.y + offset.y);
-            let offset = new Phaser.Geom.Point(0, 0);
-            Phaser.Math.Rotate(offset, this.tank.rotation);
-            bullet.fire(this.tank.x + offset.x, this.tank.y + offset.y, this.tank.rotation);
-        }
+    get tank() {
+        return this._tank;
     }
-
-    onRotate(angle) {
-        this.tank.rotation += angle;
-    } 
 }

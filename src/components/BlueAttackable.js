@@ -1,10 +1,10 @@
 import Attackable from './Attackable';
 export default class BlueAttackable extends Attackable {
-    constructor(scene, name) {
-        super(scene, name);
+    constructor(scene, name, target) {
+        super(scene, name, target);
     }
 
-    attack() {
+    onAttack() {
         console.log('blue fire');
     }
 }

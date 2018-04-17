@@ -58,10 +58,10 @@ export default class TankInput extends BaseNode {
     }
 
     onTurnLeft(pointer) { // eslint-disable-line no-unused-vars
-        this.scene.emmiter.emit('input_turnleft');
+        this.scene.emmiter.emit('input_turnleft', -0.5);
     }
 
     onTurnRight(pointer) { // eslint-disable-line no-unused-vars
-        this.scene.emmiter.emit('input_turnright');
+        this.scene.emmiter.emit('input_turnright', 0.5);
     }
 }
