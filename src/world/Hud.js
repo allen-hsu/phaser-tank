@@ -1,6 +1,6 @@
 import BaseNode from '../base/BaseNode';
 import BaseButton from '../base/BaseButton';
-export default class TankInput extends BaseNode {
+export default class Hud extends BaseNode {
     constructor(scene, x, y) {
         super(scene, x, y, 'tankinput');
     }
@@ -50,18 +50,18 @@ export default class TankInput extends BaseNode {
     // }
 
     onDown(pointer) { // eslint-disable-line no-unused-vars
-        this.scene.emmiter.emit('input_down', 0, 5);
+        this.scene.emmiter.emit('input_down', 0, 50);
     }
 
     onUp(pointer) { // eslint-disable-line no-unused-vars
-        this.scene.emmiter.emit('input_up', 0, -5);
+        this.scene.emmiter.emit('input_up', 0, -50);
     }
 
     onTurnLeft(pointer) { // eslint-disable-line no-unused-vars
-        this.scene.emmiter.emit('input_turnleft', -5);
+        this.scene.emmiter.emit('input_turnleft', -10);
     }
 
     onTurnRight(pointer) { // eslint-disable-line no-unused-vars
-        this.scene.emmiter.emit('input_turnright', 5);
+        this.scene.emmiter.emit('input_turnright', 10);
     }
 }

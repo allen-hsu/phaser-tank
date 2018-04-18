@@ -25,9 +25,6 @@ export default class Tank extends BaseNode {
 
     preload() {
         super.preload();
-        this.scene.load.image('tank', 'assets/images/tank.png');
-        this.scene.load.image('logo', 'assets/images/logo.png');
-        this.scene.load.image('bullet', 'assets/bullets/bullet.png');
     }
 
     create() {
@@ -46,6 +43,7 @@ export default class Tank extends BaseNode {
             maxSize: 30,
             runChildUpdate: true
         });
+
 
         this.setTank();
         this._transfer.setTarget(this._tank);
