@@ -5,6 +5,10 @@ export default class BootScene extends BaseScene {
     }
 
     preload() {
+        //load resource
+        this.load.image('tank', 'assets/images/tank.png');
+        this.load.image('logo', 'assets/images/logo.png');
+        this.load.image('bullet', 'assets/bullets/bullet.png');
     }
 
     create() {

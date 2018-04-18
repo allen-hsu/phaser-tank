@@ -28,6 +28,7 @@ export default class BaseScene extends Phaser.Scene {
     }
 
     addNode(node) {
+        console.log(node.name);
         this._nodes[node.name] = node;
         return node;
     }

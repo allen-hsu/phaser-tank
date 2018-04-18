@@ -32,7 +32,7 @@ export default class Tank extends BaseNode {
 
     create() {
         super.create();
-        this._tank = this.scene.add.image(400, 150, 'tank');
+        this._tank = this.scene.add.image(this.scene.cameras.main.width/2, this.scene.cameras.main.height/2, 'tank');
         // this._test = this.matter.add.image(0, 150, 'logo');
         // this._test.setVelocityX(10);
 

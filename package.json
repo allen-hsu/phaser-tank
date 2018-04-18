@@ -16,6 +16,7 @@
   },
   "dependencies": {
     "phaser": "^3.3.0",
+    "phaser-sprite-gui": "^0.7.1",
     "rxjs": "^5.5.10"
   },
   "devDependencies": {

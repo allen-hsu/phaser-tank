@@ -2,7 +2,7 @@ import Phaser from 'phaser'
 export default class BaseButton extends Phaser.GameObjects.Image {
     constructor (scene, x, y, name, index, down, out, up) {
       super(scene, x, y, name, index);
-      scene.add.existing(this).setInteractive();
+      scene.add.existing(this).setInteractive().setScrollFactor(0);
       this._down = down;
       this._out = out;
       this._up = up;
