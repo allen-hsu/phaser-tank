@@ -16,12 +16,20 @@ export default class MapGenerate extends BaseNode {
 
     create() {
         super.create();
-        this._grass = this.scene.add.group({
+        this._wall = this.scene.physics.add.group({
+            defaultKey: 'wall',
+            maxSize: 100,
+            runChildUpdate: true,
+            immovable: true
+        });
+
+        this._grass = this.scene.physics.add.staticGroup({
             defaultKey: 'grass',
             maxSize: 100,
             active: false,
             visible: false,
-            runChildUpdate: true
+            runChildUpdate: true,
+            immovable: true
         });
 
         this._grass.createMultiple({
@@ -29,6 +37,14 @@ export default class MapGenerate extends BaseNode {
             visible: false,
             key: this._grass.defaultKey,
             repeat: this._grass.maxSize - 1
+        });
+
+
+        this._wall.createMultiple({
+            active: false,
+            visible: false,
+            key: this._wall.defaultKey,
+            repeat: this._wall.maxSize - 1
         });
     }
 
@@ -41,7 +57,18 @@ export default class MapGenerate extends BaseNode {
         for (var i = 0; i < 5; i++) {
             let grass = this._grass.get(Phaser.Math.Between(x1, x2), Phaser.Math.Between(y1, y2));
             if(!grass) return;
-            grass.setActive(true).setVisible(true)
+            grass.setActive(true).setVisible(true);
+
+            let wall = this._wall.get(Phaser.Math.Between(x1, x2), Phaser.Math.Between(y1, y2));
+            if(!wall) return;
+            wall.setActive(true).setVisible(true);
+            wall.enableBody = true;
+            wall.body.allowGravity = false;
+            wall.body.immovable = true;
         }
+    }
+
+    get wall() {
+        return this._wall;
     }
 }

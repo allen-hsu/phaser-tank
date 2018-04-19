@@ -20,7 +20,7 @@ export default class Transferable extends BaseComponent {
     }
 
     update() {
-        
+        this.target.body.setVelocity(0, 0);
     }
 
     onRotate(angle) {
@@ -29,9 +29,9 @@ export default class Transferable extends BaseComponent {
 
     onMove(x, y) {
         this.velocity.setTo(x, y);
-        
         Phaser.Math.Rotate(this.velocity, this.target.rotation + Phaser.Math.DegToRad(90));
-        this.target.x += this.velocity.x;
-        this.target.y += this.velocity.y;
+        this.target.body.setVelocity(this.velocity.x, this.velocity.y);
+        //this.target.x += this.velocity.x;
+        //this.target.y += this.velocity.y;
     }
 }

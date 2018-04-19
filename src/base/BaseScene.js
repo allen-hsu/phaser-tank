@@ -21,7 +21,7 @@ export default class BaseScene extends Phaser.Scene {
         }
     }
 
-    update() {
+    update() { 
         for (var key in this._nodes) {
             this._nodes[key].update();
         }

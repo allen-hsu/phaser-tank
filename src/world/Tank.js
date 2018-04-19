@@ -29,16 +29,9 @@ export default class Tank extends BaseNode {
 
     create() {
         super.create();
-        this._tank = this.scene.add.image(this.scene.cameras.main.width/2, this.scene.cameras.main.height/2, 'tank');
-        // this._test = this.matter.add.image(0, 150, 'logo');
-        // this._test.setVelocityX(10);
-
-        // this.matter.world.on('collisionstart', function (event, bodyA, bodyB) {
-        //     bodyA.gameObject.setTint(0xff0000);
-        //     bodyB.gameObject.setTint(0x00ff00);
-        // });
-
-        this._bullets = this.scene.add.group({
+        
+        this._tank = this.scene.physics.add.image(this.scene.cameras.main.width/2, this.scene.cameras.main.height/2, 'tank');
+        this._bullets = this.scene.physics.add.group({
             classType: Bullet,
             maxSize: 30,
             runChildUpdate: true
@@ -55,7 +48,7 @@ export default class Tank extends BaseNode {
     }
 
     update() {
-
+        super.update();
     }
 
     setTank() {
