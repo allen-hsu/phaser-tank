@@ -7,12 +7,17 @@ export default class Grass extends Phaser.GameObjects.Image {
         this._life = 100;
         this._progress = this.scene.add.graphics();
         this._progress.clear();
-        this._progress.fillStyle(0xffffff, 1);
+        this._progress.fillStyle(0xff0000, 1);
+        this._progress.setDepth(1);
         
     }
 
-    update() {
-        this._progress.fillRect(this.x, this.y, 20 * this._life, 100);
+    update(time, delta) { // eslint-disable-line no-unused-vars
+        if(this._life > 0) {
+            this._progress.clear();
+            this._progress.fillStyle(0xff0000, 1);
+            this._progress.fillRect(this.x - this.width/2, this.y + this.height/2, 0.65*this._life, 10);
+        }
     }
     
     onDamage(damage) {
@@ -26,6 +31,7 @@ export default class Grass extends Phaser.GameObjects.Image {
         this.setActive(false);
         this.setVisible(false);
         this.destroy();
+        this._progress.clear();
     }
 }
     

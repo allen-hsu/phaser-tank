@@ -32,6 +32,7 @@ export default class Tank extends BaseNode {
         super.create();
         
         this._tank = this.scene.physics.add.image(this.scene.cameras.main.width/2, this.scene.cameras.main.height/2, 'tank');
+        this._tank.setDepth(2);
         this._bullets = this.scene.physics.add.group({
             classType: Bullet,
             maxSize: 30,

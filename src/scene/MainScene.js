@@ -4,6 +4,7 @@ import Hud from '../world/Hud'
 import MapGenerate from '../world/MapGenerate';
 import Bullet from '../world/Bullet'
 import Grass from '../world/Grass';
+import Wall from '../world/Wall';
 export default class MainScene extends BaseScene {
     constructor() {
         super('MainScene');
@@ -30,7 +31,8 @@ export default class MainScene extends BaseScene {
     setupCollision() {
         this._bullet = this._tank.getComponent('weapon').bullet;
         //console.log(this._mapGen.grass);
-        this.physics.add.overlap(this._bullet,this._mapGen.grass,this.collision,null,this)
+        this.physics.add.overlap(this._bullet,this._mapGen.grass,this.collision,null,this);
+        this.physics.add.overlap(this._bullet,this._mapGen.wall,this.collision,null,this)
     }
 
 
@@ -63,9 +65,16 @@ export default class MainScene extends BaseScene {
     }
 
     collision(a, b) {
-        if ((a instanceof Bullet) && (b instanceof Grass) ) {
-            a.onDestory();
-            b.onDamage(a.damage);
+        if (a instanceof Bullet) {
+            if(b instanceof Grass) {
+                a.onDestory();
+                b.onDamage(a.damage);
+            } else if(b instanceof Wall) {
+                a.onDestory();
+            } else {
+                console.log(a);
+                console.log(b);
+            }
         }
     }
 

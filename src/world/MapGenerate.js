@@ -20,17 +20,14 @@ export default class MapGenerate extends BaseNode {
             classType: Wall,
             maxSize: 100,
             runChildUpdate: true,
-            immovable: true
         });
 
         this._grass = this.scene.physics.add.group({
             classType: Grass,
             maxSize: 100,
-            active: false,
-            visible: false,
             runChildUpdate: true,
-            immovable: true
         });
+        
 
         this._grass.createMultiple({
             active: false,
