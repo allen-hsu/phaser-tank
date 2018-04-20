@@ -20,7 +20,7 @@ export default class Tank extends BaseNode {
 
     initComponent() {
         this._transfer = this.addComponent(new Transferable(this.scene, 'tansfer', this), this);
-        this._weapon = this.addComponent(new Attackable(this.scene, 'weapon', 'red', this._bullets), this);
+        this._weapon = this.addComponent(new Attackable(this.scene, 'weapon', 'red', this._bullets, 10), this);
         this.setWeapon();
     }
 
@@ -71,13 +71,16 @@ export default class Tank extends BaseNode {
             case TankType.RED :
                 //this._weapon = this.addComponent(new RedAttackable(this.scene, 'weapon', 'red', this._bullets), this);
                 this._weapon.setType('red');
+                this._weapon.setDamage(10);
             break;
             case TankType.GREEN :
                 this._weapon.setType('green');
+                this._weapon.setDamage(25);
                 //this._weapon = this.addComponent(new GreenAttackable(this.scene, 'weapon', 'green', this._bullets), this);
             break;
             case TankType.BLUE :
                 this._weapon.setType('blue');
+                this._weapon.setDamage(20);
                 //this._weapon = this.addComponent(new BlueAttackable(this.scene, 'weapon', 'blue', this._bullets), this);
             break;
         }

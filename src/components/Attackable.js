@@ -34,5 +34,9 @@ export default class Attackable extends BaseComponent {
     setType(type) {
         this._type = type;
     }
+
+    setDamage(damage) {
+        this._damage = damage;
+    }
     
 }
