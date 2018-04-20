@@ -30,7 +30,30 @@ export default class Bullet extends Phaser.GameObjects.Image {
         if (this.lifespan <= 0) {
           this.setActive(false);
           this.setVisible(false);
+          this.body.stop();
         }
+    }
+
+    setType(type) {
+        this._type = type;
+    }
+
+    get type() {
+        return this._type;
+    }
+
+    setDamage(damage) {
+        this._damage = damage;
+    }
+
+    get damage() {
+        return this._damage;
+    }
+
+    onDestory() {
+        this.setActive(false);
+        this.setVisible(false);
+        this.destroy();
     }
 }
     

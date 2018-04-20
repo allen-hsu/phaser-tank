@@ -1,6 +1,6 @@
 import BaseNode from '../base/BaseNode';
-
-
+import Grass from '../world/Grass';
+import Wall from '../world/Wall';
 export default class MapGenerate extends BaseNode {
     
     constructor(scene, x, y, name) {
@@ -17,14 +17,14 @@ export default class MapGenerate extends BaseNode {
     create() {
         super.create();
         this._wall = this.scene.physics.add.group({
-            defaultKey: 'wall',
+            classType: Wall,
             maxSize: 100,
             runChildUpdate: true,
             immovable: true
         });
 
-        this._grass = this.scene.physics.add.staticGroup({
-            defaultKey: 'grass',
+        this._grass = this.scene.physics.add.group({
+            classType: Grass,
             maxSize: 100,
             active: false,
             visible: false,
@@ -70,5 +70,9 @@ export default class MapGenerate extends BaseNode {
 
     get wall() {
         return this._wall;
+    }
+
+    get grass() {
+        return this._grass;
     }
 }

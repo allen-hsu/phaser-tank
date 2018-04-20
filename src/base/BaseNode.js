@@ -36,6 +36,10 @@ export default class BaseNode {
         return component;
     }
 
+    getComponent(name) {
+        return this._components[name]
+    }
+
     get scene() {
         return this._scene;
     }

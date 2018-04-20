@@ -1,8 +1,8 @@
 import BaseNode from '../base/BaseNode';
 import Transferable from '../components/Transferable';
-import BlueAttackable from '../components/BlueAttackable';
-import RedAttackable from '../components/RedAttackable';
-import GreenAttackable from '../components/GreenAttackable';
+// import BlueAttackable from '../components/BlueAttackable';
+// import RedAttackable from '../components/RedAttackable';
+import Attackable from '../components/Attackable';
 import Bullet from './Bullet';
 export const TankType = {
     RED: 0,
@@ -20,6 +20,7 @@ export default class Tank extends BaseNode {
 
     initComponent() {
         this._transfer = this.addComponent(new Transferable(this.scene, 'tansfer', this), this);
+        this._weapon = this.addComponent(new Attackable(this.scene, 'weapon', 'red', this._bullets), this);
         this.setWeapon();
     }
 
@@ -68,13 +69,16 @@ export default class Tank extends BaseNode {
     setWeapon() {
         switch (this._type) {
             case TankType.RED :
-                this._weapon = this.addComponent(new RedAttackable(this.scene, 'weapon'), this);
+                //this._weapon = this.addComponent(new RedAttackable(this.scene, 'weapon', 'red', this._bullets), this);
+                this._weapon.setType('red');
             break;
             case TankType.GREEN :
-                this._weapon = this.addComponent(new GreenAttackable(this.scene, 'weapon'), this);
+                this._weapon.setType('green');
+                //this._weapon = this.addComponent(new GreenAttackable(this.scene, 'weapon', 'green', this._bullets), this);
             break;
             case TankType.BLUE :
-                this._weapon = this.addComponent(new BlueAttackable(this.scene, 'weapon'), this);
+                this._weapon.setType('blue');
+                //this._weapon = this.addComponent(new BlueAttackable(this.scene, 'weapon', 'blue', this._bullets), this);
             break;
         }
     }

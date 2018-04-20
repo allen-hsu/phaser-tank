@@ -2,6 +2,8 @@ import BaseScene from '../base/BaseScene'
 import Tank, { TankType } from '../world/Tank'
 import Hud from '../world/Hud'
 import MapGenerate from '../world/MapGenerate';
+import Bullet from '../world/Bullet'
+import Grass from '../world/Grass';
 export default class MainScene extends BaseScene {
     constructor() {
         super('MainScene');
@@ -19,15 +21,16 @@ export default class MainScene extends BaseScene {
         this.cameras.main.setSize(800, 600);
         this.cameras.main.startFollow(this._tank.tank);
 
-        
-        this.physics.add.overlap(this._tank.tank,this._mapGen.wall,this.collectWall,null,this)
-
+        //this.physics.add.overlap(this._tank.tank,this._mapGen.wall,this.collectWall,null,this)
         this._bg = this.add.tileSprite(400, 300, 800, 600, 'background').setScrollFactor(0).setDepth(-1);
         this.randomGenMap();
+        this.setupCollision();
     }
 
-    collectWall() {
-        
+    setupCollision() {
+        this._bullet = this._tank.getComponent('weapon').bullet;
+        //console.log(this._mapGen.grass);
+        this.physics.add.overlap(this._bullet,this._mapGen.grass,this.collision,null,this)
     }
 
 
@@ -51,9 +54,20 @@ export default class MainScene extends BaseScene {
 
         this._bg.tilePositionX += this._tank.tank.body.deltaX() * 0.5;
         this._bg.tilePositionY += this._tank.tank.body.deltaY() * 0.5;
+       
+        this.updateCollision();
+    }
+
+    updateCollision() {
         this.physics.world.collide(this._tank.tank,this._mapGen.wall);
     }
 
+    collision(a, b) {
+        if ((a instanceof Bullet) && (b instanceof Grass) ) {
+            a.onDestory();
+            b.onDamage(a.damage);
+        }
+    }
 
     randomGenMap() {
         //center
