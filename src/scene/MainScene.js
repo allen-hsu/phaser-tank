@@ -70,7 +70,7 @@ export default class MainScene extends BaseScene {
         if(this._tank.tank.y > this._bottomBorder) {
             this._mapGen.genMap(this._leftBorder, this._rightBorder, this._tank.tank.y + this._height*0.25 , this._bottomBorder + this._height);
             this._bottomBorder += this._height;
-            this._topBorder -= this._height;
+            this._topBorder += this._height;
         }
     }
 
