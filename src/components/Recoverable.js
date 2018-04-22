@@ -5,15 +5,20 @@ export default class Recoverable extends BaseComponent {
     }
 
     create() {
-        
+        this.target.on('recover', this.onRecover, this);
     }
 
     update() {
- 
+        if(this.distance() > 800) {
+            this.onRecover();
+        }
     }
 
     onRecover() {
-
+        this.target.setActive(false);
+        this.target.setVisible(false);
+        this.target.body.stop();
+        this.target.destroy();
     }
 
     distance() {

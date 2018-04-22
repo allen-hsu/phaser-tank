@@ -22,8 +22,6 @@ export default class MapGenerate extends BaseNode {
             fontFamily: 'monospace',
             lineSpacing: 4
         };
-        
-        
     }
 
 
@@ -64,17 +62,9 @@ export default class MapGenerate extends BaseNode {
         // ]));
     }
 
-    genMap(x1, x2, y1, y2) {
-        console.log(x1, x2, y1, y2);
-        let xSize = Math.abs(x1 - x2);
-        let ySize = Math.abs(y1 - y2);
-
+    genMap(x1, x2, y1, y2) { // eslint-disable-line no-unused-vars
         let xRange = 4;
         let yRange = 3;
-        console.log('xSize' + xSize);
-        console.log('ySize' + ySize);
-        console.log('xRange' + xRange);
-        console.log('yRange' + yRange);
         for(var i = 0; i <= xRange; i++) {
             var lastX = i - 1;
             if(lastX <= 0) {
@@ -94,19 +84,17 @@ export default class MapGenerate extends BaseNode {
                     let genY1 = this._tileHeight*lastY;
                     let genY2 = this._tileHeight*k;
                     let random = Math.floor(Math.random() * 100) + 0;
-                    console.log('gen random' + random);
-                    console.log(genX1, genX2, genY1, genY2);
                     if(random >= 0 && random <= 10) {
                         console.log('gen empty');
                     } else if(random > 10 && random <= 50) {
-                        console.log('gen wall',Phaser.Math.Between(x1 + genX1, x1 + genX2), Phaser.Math.Between(y1 + genY1, y1 + genY2) );
+                        //console.log('gen wall',Phaser.Math.Between(x1 + genX1, x1 + genX2), Phaser.Math.Between(y1 + genY1, y1 + genY2) );
                         let wall = this._wall.get();
                         if(!wall) return;
                         wall.setActive(true).setVisible(true).setPosition(Phaser.Math.Between(x1 + genX1, x1 + genX2), Phaser.Math.Between(y1 + genY1, y1 + genY2));
                         wall.enableBody = true;
                         wall.body.immovable = true;
                     } else {
-                        console.log('gen grass',Phaser.Math.Between(x1 + genX1, x1 + genX2), Phaser.Math.Between(y1 + genY1, y1 + genY2) );
+                        //console.log('gen grass',Phaser.Math.Between(x1 + genX1, x1 + genX2), Phaser.Math.Between(y1 + genY1, y1 + genY2) );
                         let grass = this._grass.get();
                         if(!grass) return;
                         grass.setActive(true).setVisible(true).setPosition(Phaser.Math.Between(x1 + genX1, x1 + genX2), Phaser.Math.Between(y1 + genY1, y1 + genY2));
@@ -114,19 +102,6 @@ export default class MapGenerate extends BaseNode {
                 }
             }
         }
-        // for (var i = 0; i < 5; i++) {
-        //     let grass = this._grass.get();
-        //     if(!grass) return;
-            
-        //     //
-        //     grass.setActive(true).setVisible(true).setPosition(Phaser.Math.Between(x1, x2), Phaser.Math.Between(y1, y2));
-        //     let wall = this._wall.get();
-        //     if(!wall) return;
-        //     wall.setActive(true).setVisible(true).setPosition(Phaser.Math.Between(x1, x2), Phaser.Math.Between(y1, y2));
-        //     wall.enableBody = true;
-        //     wall.body.allowGravity = false;
-        //     wall.body.immovable = true;
-        // }
     }
 
     get wall() {

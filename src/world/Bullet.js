@@ -1,5 +1,5 @@
 import Phaser from 'phaser'
-
+import Recoverable from '../components/Recoverable';
 export default class Bullet extends Phaser.GameObjects.Image {
 
     constructor(scene) {
@@ -7,6 +7,8 @@ export default class Bullet extends Phaser.GameObjects.Image {
         this.speed = Phaser.Math.GetSpeed(600, 1);
         this.lifespan = 3000;
         this.velocity = new Phaser.Geom.Point(0, 0);
+        this._recover = new Recoverable(scene, 'recover', this);
+        this._recover.create();
     }
 
     fire(x, y, direction) {
@@ -27,11 +29,9 @@ export default class Bullet extends Phaser.GameObjects.Image {
         
         this.lifespan -= delta;
 
+        this._recover.update();
         if (this.lifespan <= 0) {
-          this.setActive(false);
-          this.setVisible(false);
-          this.body.stop();
-          this.destroy();
+            this.emit('recover');
         }
     }
 
@@ -49,12 +49,6 @@ export default class Bullet extends Phaser.GameObjects.Image {
 
     get damage() {
         return this._damage;
-    }
-
-    onDestory() {
-        this.setActive(false);
-        this.setVisible(false);
-        this.destroy();
     }
 }
     

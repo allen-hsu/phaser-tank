@@ -82,10 +82,10 @@ export default class MainScene extends BaseScene {
     collision(a, b) {
         if (a instanceof Bullet) {
             if(b instanceof Grass) {
-                a.onDestory();
-                b.onDamage(a.damage);
+                a.emit('recover');
+                b.emit('dammage', a.damage);           
             } else if(b instanceof Wall) {
-                a.onDestory();
+                a.emit('recover');
             } else {
                 console.log(a);
                 console.log(b);
@@ -94,7 +94,6 @@ export default class MainScene extends BaseScene {
     }
 
     collisionWall() {
-        console.log('collisionWall');
         this._onBlock = true;
     }
 
