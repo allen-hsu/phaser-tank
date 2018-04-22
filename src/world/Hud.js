@@ -50,11 +50,11 @@ export default class Hud extends BaseNode {
     // }
 
     onDown(pointer) { // eslint-disable-line no-unused-vars
-        this.scene.emmiter.emit('input_down', 0, 150);
+        this.scene.emmiter.emit('input_down', 0, 1500);
     }
 
     onUp(pointer) { // eslint-disable-line no-unused-vars
-        this.scene.emmiter.emit('input_up', 0, -150);
+        this.scene.emmiter.emit('input_up', 0, -1500);
     }
 
     onTurnLeft(pointer) { // eslint-disable-line no-unused-vars

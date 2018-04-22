@@ -5,7 +5,10 @@ export default class MapGenerate extends BaseNode {
     
     constructor(scene, x, y, name) {
         super(scene, x, y, name);
+        this._tileWidth = 100;
+        this._tileHeight = 100;
     }
+
 
     initComponent() {
     }
@@ -20,12 +23,16 @@ export default class MapGenerate extends BaseNode {
             classType: Wall,
             maxSize: 100,
             runChildUpdate: true,
+            checkWorldBounds: true,
+            outOfBoundsKill: true,
         });
 
         this._grass = this.scene.physics.add.group({
             classType: Grass,
             maxSize: 100,
             runChildUpdate: true,
+            checkWorldBounds: true,
+            outOfBoundsKill: true,
         });
         
 
@@ -50,18 +57,18 @@ export default class MapGenerate extends BaseNode {
     }
 
     genMap(x1, x2, y1, y2) {
-
         for (var i = 0; i < 5; i++) {
             let grass = this._grass.get(Phaser.Math.Between(x1, x2), Phaser.Math.Between(y1, y2));
             if(!grass) return;
             grass.setActive(true).setVisible(true);
-
             let wall = this._wall.get(Phaser.Math.Between(x1, x2), Phaser.Math.Between(y1, y2));
             if(!wall) return;
             wall.setActive(true).setVisible(true);
             wall.enableBody = true;
             wall.body.allowGravity = false;
             wall.body.immovable = true;
+            wall.checkWorldBounds = true;
+            wall.outOfBoundsKill = true;
         }
     }
 

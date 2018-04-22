@@ -18,6 +18,10 @@ export default class Grass extends Phaser.GameObjects.Image {
             this._progress.fillStyle(0xff0000, 1);
             this._progress.fillRect(this.x - this.width/2, this.y + this.height/2, 0.65*this._life, 10);
         }
+
+        if(this.x < this.scene.leftBorder) {
+            this.onDestory();
+        }
     }
     
     onDamage(damage) {
