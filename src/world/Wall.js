@@ -7,31 +7,23 @@ export default class Wall extends Phaser.GameObjects.Image {
     }
 
     update(time, delta) { // eslint-disable-line no-unused-vars
-        if(this.x < this.scene.leftBorder) {
-            this.onDestory();
-        }
-
-        if(this.x < this.scene.leftBorder) {
-            this.onDestory();
-        }
-
-        if(this.x > this.scene.rightBorder) {
-            this.onDestory();
-        }
-
-        if(this.y < this.scene.topBorder) {
-            this.onDestory();
-        }
-
-        if(this.y > this.scene.bottomBorder) {
-            this.onDestory();
+        //console.log(this.scene._tank.tank.x);
+        if(this.distance() > 800) {
+            this.onDestroy();
         }
     }
 
-    onDestory() {
+    onDestroy() {
         this.setActive(false);
         this.setVisible(false);
+        this.body.stop();
         this.destroy();
+    }
+
+    distance() {
+        var dx = this.x - this.scene._tank.tank.x;
+        var dy = this.y - this.scene._tank.tank.y;
+        return Math.sqrt(dx * dx + dy * dy);
     }
 }
     

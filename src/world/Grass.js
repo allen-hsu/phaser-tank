@@ -19,23 +19,30 @@ export default class Grass extends Phaser.GameObjects.Image {
             this._progress.fillRect(this.x - this.width/2, this.y + this.height/2, 0.65*this._life, 10);
         }
 
-        if(this.x < this.scene.leftBorder) {
-            this.onDestory();
+        if(this.distance() > 800) {
+            this.onDestroy();
         }
     }
     
     onDamage(damage) {
         this._life -= damage;
         if(this._life <= 0) {
-            this.onDestory();
+            this.onDestroy();
         }
     }
 
-    onDestory() {
+    onDestroy() {
         this.setActive(false);
         this.setVisible(false);
-        this.destroy();
         this._progress.clear();
+        this.body.stop();
+        this.destroy();
+    }
+
+    distance() {
+        var dx = this.x - this.scene._tank.tank.x;
+        var dy = this.y - this.scene._tank.tank.y;
+        return Math.sqrt(dx * dx + dy * dy);
     }
 }
     
